@@ -20,9 +20,6 @@ const stan = nats.connect("ticketing",randomBytes(4).toString('hex'),{
     This is achieved using Queue Group ( built in node-nats-streaming ) 
     Inside the channel we create a queue group ( can be multiple QG in channel as well ) and random selection of service is done
 
-
-
-
 */
 
 stan.on('connect',()=>{
