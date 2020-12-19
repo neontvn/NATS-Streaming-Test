@@ -32,4 +32,22 @@ const stan = nats.connect("ticketing","abc",{
 
 stan.on('connect',()=>{
     console.log("publisher connected to nats")
+    
+    // Publishing an event to a channel
+    // Note : Event is often referred to as MESSAGE in the docs
+    const data = JSON.stringify({
+        id : "234423",
+        title : "concert",
+        price : 1200
+    });
+
+    // call the publish function with data and channel
+    stan.publish("tickets:created",data,()=>{
+        //callback function
+        console.log("Event Published")
+    })
+
 })
+
+
+
