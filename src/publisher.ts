@@ -8,6 +8,7 @@ const stan = nats.connect("ticketing","abc",{
     url : "http://localhost:4222", // This is the url of nats-streaming server which is currently inside the k8s cluster
 });                                // We need to somehow get access to the server pod for the same
 
+
 /* 
     1. One of the ways to do this is to expose the pod as a clusterIP service to ingress-nginx and then access
     by reaching out to ingress
