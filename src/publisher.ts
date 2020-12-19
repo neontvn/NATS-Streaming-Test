@@ -1,4 +1,5 @@
 import nats from 'node-nats-streaming';
+console.clear();
 
 // client is often reffered to as stan. stan is nats read backwards
 // connect to the nats streaming server
@@ -42,9 +43,9 @@ stan.on('connect',()=>{
     });
 
     // call the publish function with data and channel
-    stan.publish("tickets:created",data,()=>{
+    stan.publish("ticket:created",data,()=>{
         //callback function
-        console.log("Event Published")
+        console.log("Event Published")        
     })
 
 })
