@@ -1,0 +1,4 @@
+ Port Forwarding
+ > kubectl port-forward nats-depl-654ffc757b-qjtmj 8222:8222
+
+http://localhost:8222/streaming/clientsz?subs=1

@@ -23,15 +23,39 @@ const stan = nats.connect("ticketing",randomBytes(4).toString('hex'),{
 */
 
 stan.on('connect',()=>{
+
     console.log("Listener connected to NATS");
+    
+    // End the process and exit
+    stan.on('close',()=>{
+        console.log("NATS connection closed!");
+        process.exit();
+    })
+
+    const options = stan
+        .subscriptionOptions()
+        .setManualAckMode(true)
     
     const subscription = stan.subscribe('ticket:created','listenerQueueGroup'); // subscribe to a channel and a name of Queue Group
     subscription.on('message',(msg : Message)=>{           // msg is of type Message to get the details 
                                                            // out of the data
-        console.log("received")    
+        
+        console.log("received")
+        // NATS gets to know that the event has been received by the client but it may happen that
+        // there is an error that results in loss of the event completely. This is the default behaviour
+        // and it can be changed by setting the options - setManualAckMode to true
+        // With this the node-nats-streaming will not automatically acknowledge the event received. Has to be
+        // done manually.
+
+            
         const data = msg.getData();
         if(typeof data === 'string'){
             console.log(`Received event #${msg.getSequence()} with data : ${data}`);
         }
-    })
-})
+        msg.ack();
+    });
+});
+
+// interrupt or terminate requests
+process.on('SIGINT', () => stan.close());
+process.on('SIGTERM', () => stan.close());
