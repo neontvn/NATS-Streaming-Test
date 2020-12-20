@@ -35,8 +35,12 @@ stan.on('connect',()=>{
     const options = stan
         .subscriptionOptions()
         .setManualAckMode(true)
+        .setDeliverAllAvailable()
+        .setDurableName('orders-service');      // Durable Subscriptions
+
+    const subscription = stan.subscribe('ticket:created','listenerQueueGroup', options);
     
-    const subscription = stan.subscribe('ticket:created','listenerQueueGroup'); // subscribe to a channel and a name of Queue Group
+    // const subscription = stan.subscribe('ticket:created','listenerQueueGroup'); // subscribe to a channel and a name of Queue Group
     subscription.on('message',(msg : Message)=>{           // msg is of type Message to get the details 
                                                            // out of the data
         
