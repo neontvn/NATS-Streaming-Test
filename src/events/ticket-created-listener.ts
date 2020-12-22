@@ -10,16 +10,16 @@ import { TicketCreatedEvent } from "./ticket-created-event";
 // TicketCreatedEvent
 
 class TicketCreatedListener extends Listener<TicketCreatedEvent>  {
-    
+
     // Now there is strict type annotation that the subject has to be ticket created and there is
     // only once that we have to write the meaning to TicketCreated variable ie in the Subjects enum
 
     subject: Subjects.TicketCreated = Subjects.TicketCreated;   // No more typos :)
     queueGroupName = "payments-service";
 
-    onMessage( data:TicketCreatedEvent['data'], msg: Message ){
+    onMessage(data: TicketCreatedEvent['data'], msg: Message) {
         console.log("Event data", data);
-        msg.ack();                
+        msg.ack();
     }
 }
 

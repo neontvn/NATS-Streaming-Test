@@ -19,7 +19,7 @@ stan.on('connect', async ()=>{
         price : 1200
     }
 
-    // call the publish function with data and channel
+    // call the publish function with data and channel to create a ticket
     const publisher = new TicketCreatedPublisher(stan);
     await publisher.publish(data);
 })

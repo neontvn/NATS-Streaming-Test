@@ -18,8 +18,10 @@ stan.on('connect',()=>{
         process.exit();
     })
     
-    // Now only implements the specific the listener 
+    // Call the class with the instance of client and then call the function listen to
+    // listen to any data from the channel of ticket creation
     new TicketCreatedListener(stan).listen();
+
 });
 
 // interrupt or terminate requests
