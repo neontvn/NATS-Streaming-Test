@@ -17,6 +17,8 @@ stan.on('connect',()=>{
         console.log("NATS connection closed!");
         process.exit();
     })
+    
+    // Now only implements the specific the listener 
     new TicketCreatedListener(stan).listen();
 });
 
